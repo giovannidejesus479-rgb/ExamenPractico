@@ -13,7 +13,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity> handleBusinessException(BusinessException ex) {
+    public ResponseEntity<Map<String, String>> handleBusinessException(BusinessException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("codigo", ex.getCodigo());
         error.put("mensaje", ex.getMessage());
@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("codigo", "SOLICITUD_INVALIDA");
         String message = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
